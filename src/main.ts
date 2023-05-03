@@ -4,8 +4,11 @@ import { FilesResource } from "./files.resource.ts";
 class AppResource extends Drash.Resource {
   public paths = ["/"];
 
-  public GET(request: Drash.Request, response: Drash.Response): void {
-    const html = Deno.readTextFileSync("./views/index.html");
+  public async GET(
+    request: Drash.Request,
+    response: Drash.Response
+  ): Promise<void> {
+    const html = await Deno.readTextFile("./views/index.html");
     return response.html(html);
   }
 }
